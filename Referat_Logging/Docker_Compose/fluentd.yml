@@ -14,19 +14,38 @@ services:
     volumes:
       - ./elasticsearch_8.15.0:/usr/share/elasticsearch/data
     networks:
-      - elk_network
+      - efk_network
 
-  logstash:
-    image: docker.io/elastic/logstash:8.15.0
-    container_name: logstash
-    volumes:
-      - ./logstash/pipeline/gelf.conf:/usr/share/logstash/pipeline/logstash.conf
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:9200" ]
+#      interval: 10s
+#      retries: 5
+#      start_period: 30s
+#      timeout: 10s
+#
+#  logstash:
+#    image: docker.io/elastic/logstash:8.15.0
+#    container_name: logstash
+#    volumes:
+#      - ./logstash/pipeline/gelf.conf:/usr/share/logstash/pipeline/logstash.conf
+#    ports:
+#      - "12201:12201/udp"
+#      - "5000:5000"
+#      - "9600:9600"
+#    networks:
+#      - elk_network
+#    depends_on:
+#      elasticsearch:
+#        condition: service_healthy
+  fluentd:
+    image: docker.io/fluent/fluentd:v1.14.6-1
+    container_name: fluentd
     ports:
       - "12201:12201/udp"
-      - "5000:5000"
-      - "9600:9600"
+    volumes:
+      - ./fluentd:/fluentd/etc
     networks:
-      - elk_network
+      - efk_network
     depends_on:
       - elasticsearch
 
@@ -36,7 +55,7 @@ services:
     ports:
       - "5601:5601"
     networks:
-      - elk_network
+      - efk_network
     depends_on:
       - elasticsearch
 
@@ -45,14 +64,16 @@ services:
     container_name: mqtt_logging_handler
     ports:
       - "8080:8080"
+    environment:
+      - QUARKUS_LOG_HANDLER_GELF_HOST=fluentd
     volumes:
       - ../Backend/mqtt_logging_handler/target:/app
       - ./mqtt_logging_handler/logs:/app/logs
     command: java -jar /app/quarkus-app/quarkus-run.jar
     networks:
-      - elk_network
+      - efk_network
     depends_on:
-      - logstash
+      - fluentd
       - elasticsearch
       - kibana
 
@@ -62,7 +83,7 @@ services:
     ports:
       - "1883:1883"
     networks:
-      - elk_network
+      - efk_network
       - docker_compose_home_assistant_network
     volumes:
       - ./mosquitto/config:/mosquitto/config
@@ -70,7 +91,7 @@ services:
       - ./mosquitto/log:/mosquitto/log
 
 networks:
-  elk_network:
+  efk_network:
     driver: bridge
 
   docker_compose_home_assistant_network:
