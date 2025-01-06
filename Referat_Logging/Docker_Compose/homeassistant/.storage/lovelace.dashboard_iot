@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_iot",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Home",
+          "sections": [],
+          "cards": [],
+          "badges": [
+            {
+              "type": "entity",
+              "show_name": true,
+              "show_state": true,
+              "show_icon": true,
+              "entity": "light.wmc_nik_esp_wmc_nik_esp_rgb_light",
+              "color": "",
+              "name": "ESP Light WMC"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

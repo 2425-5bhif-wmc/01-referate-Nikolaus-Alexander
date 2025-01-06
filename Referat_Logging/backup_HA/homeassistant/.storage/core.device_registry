@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "minor_version": 8,
+  "key": "core.device_registry",
+  "data": {
+    "devices": [
+      {"area_id":null,"config_entries":["01JF5M23HDZ8AKHB79K34M3MXC"],"configuration_url":null,"connections":[],"created_at":"2024-12-15T16:57:38.606954+00:00","disabled_by":"config_entry","entry_type":"service","hw_version":null,"id":"559dd3b7ac6e9496ba08418de42e9217","identifiers":[["sun","01JF5M23HDZ8AKHB79K34M3MXC"]],"labels":[],"manufacturer":null,"model":null,"model_id":null,"modified_at":"2024-12-15T17:52:09.601028+00:00","name_by_user":null,"name":"Sun","primary_config_entry":"01JF5M23HDZ8AKHB79K34M3MXC","serial_number":null,"sw_version":null,"via_device_id":null},
+      {"area_id":null,"config_entries":["01JF5M36JFKJXG1JETDP9QA7P4"],"configuration_url":"https://www.met.no/en","connections":[],"created_at":"2024-12-15T16:58:14.777991+00:00","disabled_by":"config_entry","entry_type":"service","hw_version":null,"id":"ce71ad53e14940bf4ddc6003a008b4a8","identifiers":[["met","01JF5M36JFKJXG1JETDP9QA7P4"]],"labels":[],"manufacturer":"Met.no","model":"Forecast","model_id":null,"modified_at":"2024-12-15T17:52:26.526775+00:00","name_by_user":null,"name":"Forecast","primary_config_entry":"01JF5M36JFKJXG1JETDP9QA7P4","serial_number":null,"sw_version":null,"via_device_id":null},
+      {"area_id":null,"config_entries":["01JF5NDKHE43FF1R6FX0QEE4Z6"],"configuration_url":null,"connections":[["mac","e4:65:b8:11:e1:7c"]],"created_at":"2024-12-15T17:33:38.150976+00:00","disabled_by":null,"entry_type":null,"hw_version":null,"id":"89d96a6d6336bf8f410de8906022b5be","identifiers":[["mqtt","e465b811e17c"]],"labels":[],"manufacturer":"Espressif","model":"esp32dev","model_id":null,"modified_at":"2024-12-15T19:52:05.776722+00:00","name_by_user":null,"name":"wmc_iot_referat_nikolaus_esp_1","primary_config_entry":"01JF5NDKHE43FF1R6FX0QEE4Z6","serial_number":null,"sw_version":"2024.11.3 (Dec 15 2024, 20:50:09)","via_device_id":null}
+    ],
+    "deleted_devices": []
+  }
+}

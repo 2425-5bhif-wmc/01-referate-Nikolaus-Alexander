@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "minor_version": 2,
+  "key": "core.label_registry",
+  "data": {
+    "labels": [
+      {
+        "color": "primary",
+        "description": null,
+        "icon": "mdi:cast-connected",
+        "label_id": "iot",
+        "name": "IOT",
+        "created_at": "2024-12-15T17:56:37.936480+00:00",
+        "modified_at": "2024-12-15T17:56:37.936486+00:00"
+      }
+    ]
+  }
+}

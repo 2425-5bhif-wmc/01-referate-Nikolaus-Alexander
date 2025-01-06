@@ -1,0 +1,19 @@
+substitutions:
+  name: "wmc-nik-ap"
+
+esphome:
+  name: ${name}
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+  level: DEBUG
+
+wifi:
+  ap:
+    ssid: "nik-wmc-ap"
+    password: "nik-wmc-ap"
+    ap_timeout: 10s

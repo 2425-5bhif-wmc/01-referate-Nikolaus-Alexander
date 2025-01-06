@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "minor_version": 4,
+  "key": "core.config_entries",
+  "data": {
+    "entries": [
+      {"created_at":"2024-12-15T16:57:38.605657+00:00","data":{},"disabled_by":"user","discovery_keys":{},"domain":"sun","entry_id":"01JF5M23HDZ8AKHB79K34M3MXC","minor_version":1,"modified_at":"2024-12-15T16:57:38.605661+00:00","options":{},"pref_disable_new_entities":false,"pref_disable_polling":false,"source":"import","title":"Sun","unique_id":null,"version":1},
+      {"created_at":"2024-12-15T16:57:38.783480+00:00","data":{},"disabled_by":null,"discovery_keys":{},"domain":"go2rtc","entry_id":"01JF5M23PZTRFVKB5TWZR050SG","minor_version":1,"modified_at":"2024-12-15T16:57:38.783484+00:00","options":{},"pref_disable_new_entities":false,"pref_disable_polling":false,"source":"system","title":"go2rtc","unique_id":null,"version":1},
+      {"created_at":"2024-12-15T16:58:14.462820+00:00","data":{},"disabled_by":"user","discovery_keys":{},"domain":"shopping_list","entry_id":"01JF5M36HYF3BDJ4C529Y50Z8K","minor_version":1,"modified_at":"2024-12-15T16:58:14.462824+00:00","options":{},"pref_disable_new_entities":false,"pref_disable_polling":false,"source":"onboarding","title":"Shopping list","unique_id":"shopping_list","version":1},
+      {"created_at":"2024-12-15T16:58:14.469044+00:00","data":{"language":"en","tld":"com"},"disabled_by":"user","discovery_keys":{},"domain":"google_translate","entry_id":"01JF5M36J5R3H3Y6D9BC60JEJX","minor_version":1,"modified_at":"2024-12-15T16:58:14.469056+00:00","options":{},"pref_disable_new_entities":false,"pref_disable_polling":false,"source":"onboarding","title":"Google Translate text-to-speech","unique_id":null,"version":1},
+      {"created_at":"2024-12-15T16:58:14.479650+00:00","data":{"track_home":true},"disabled_by":"user","discovery_keys":{},"domain":"met","entry_id":"01JF5M36JFKJXG1JETDP9QA7P4","minor_version":1,"modified_at":"2024-12-15T16:58:14.479658+00:00","options":{},"pref_disable_new_entities":false,"pref_disable_polling":false,"source":"onboarding","title":"Home","unique_id":null,"version":1},
+      {"created_at":"2024-12-15T16:58:14.544391+00:00","data":{},"disabled_by":"user","discovery_keys":{},"domain":"radio_browser","entry_id":"01JF5M36MGNHQECQKWJBT6S75P","minor_version":1,"modified_at":"2024-12-15T16:58:14.544398+00:00","options":{},"pref_disable_new_entities":false,"pref_disable_polling":false,"source":"onboarding","title":"Radio Browser","unique_id":null,"version":1},
+      {"created_at":"2025-01-04T09:30:22.088598+00:00","data":{"birth_message":{"payload":"online","qos":0,"retain":false,"topic":"homeassistant/status"},"broker":"mqtt_for_home_assistant","discovery":true,"discovery_prefix":"homeassistant","password":"Leonding#22","port":1883,"username":"nik","will_message":{"payload":"offline","qos":0,"retain":false,"topic":"homeassistant/status"}},"disabled_by":null,"discovery_keys":{},"domain":"mqtt","entry_id":"01JGRADG0886ECWST8KYMJKHTD","minor_version":1,"modified_at":"2025-01-05T17:11:38.069998+00:00","options":{},"pref_disable_new_entities":false,"pref_disable_polling":false,"source":"user","title":"mqtt_for_home_assistant","unique_id":null,"version":1}
+    ]
+  }
+}

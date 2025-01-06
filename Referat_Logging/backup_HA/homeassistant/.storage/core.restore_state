@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "core.restore_state",
+  "data": [
+    {
+      "state": {"entity_id":"person.nik","state":"unknown","attributes":{"editable":true,"id":"nik","device_trackers":[],"source":"person.nik","user_id":"c0047fd1c52f4b70a88159d36aad2622","friendly_name":"nik"},"last_changed":"2024-12-16T06:51:46.606415+00:00","last_reported":"2024-12-16T06:51:46.606415+00:00","last_updated":"2024-12-16T06:51:46.606415+00:00","context":{"id":"01JF73SEHE24W265Y0S1AWZ1Y5","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-12-16T06:51:52.623607+00:00"
+    },
+    {
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2024-12-16T06:51:47.325328+00:00","last_reported":"2024-12-16T06:51:47.325328+00:00","last_updated":"2024-12-16T06:51:47.325328+00:00","context":{"id":"01JF73SF7XZ8TS7MNAHAEYNHTZ","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-12-16T06:51:52.623607+00:00"
+    },
+    {
+      "state": {"entity_id":"light.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_rgb_light","state":"unavailable","attributes":{"supported_color_modes":["rgb"],"friendly_name":"Lamp_ESP32_Nik","supported_features":40},"last_changed":"2024-12-15T20:05:15.040833+00:00","last_reported":"2024-12-15T20:05:15.040833+00:00","last_updated":"2024-12-15T20:05:15.040833+00:00","context":{"id":"01JF5YSM50RMXDMY03QTMPAFAX","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-12-15T20:10:36.060618+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_co2_level","state":"unavailable","attributes":{"state_class":"measurement","unit_of_measurement":"ppm","device_class":"carbon_dioxide","icon":"mdi:molecule-co2","friendly_name":"ESP_CO2"},"last_changed":"2024-12-15T20:05:15.040667+00:00","last_reported":"2024-12-15T20:05:15.040667+00:00","last_updated":"2024-12-15T20:05:15.040667+00:00","context":{"id":"01JF5YSM50GH65WNX9RGJE0STJ","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": "ppm"
+      },
+      "last_seen": "2024-12-15T20:10:36.060618+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_tvoc_level","state":"unavailable","attributes":{"state_class":"measurement","unit_of_measurement":"ppb","device_class":"volatile_organic_compounds_parts","icon":"mdi:air-filter","friendly_name":"ESP_TVOC_Level"},"last_changed":"2024-12-15T20:05:15.040884+00:00","last_reported":"2024-12-15T20:05:15.040884+00:00","last_updated":"2024-12-15T20:05:15.040884+00:00","context":{"id":"01JF5YSM50C4JFCNY2E8DQ03V2","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": "ppb"
+      },
+      "last_seen": "2024-12-15T20:10:36.060618+00:00"
+    },
+    {
+      "state": {"entity_id":"tts.google_translate_en_com","state":"unknown","attributes":{"friendly_name":"Google Translate en com"},"last_changed":"2024-12-15T17:18:53.966995+00:00","last_reported":"2024-12-15T17:18:53.966995+00:00","last_updated":"2024-12-15T17:18:53.966995+00:00","context":{"id":"01JF5N910EES15MRGVA3KJWN9M","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2024-12-15T17:51:43.156050+00:00"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Home",
+          "badges": [
+            {
+              "type": "entity",
+              "show_name": true,
+              "show_state": true,
+              "show_icon": true,
+              "entity": "light.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_rgb_light",
+              "color": "state",
+              "name": "ESP_Light",
+              "state_content": [
+                "brightness",
+                "rgb_color",
+                "last_changed"
+              ],
+              "show_entity_picture": false
+            }
+          ],
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading_style": "title",
+                  "heading": "MQTT Section",
+                  "icon": "mdi:sine-wave",
+                  "badges": []
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "entity": "light.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_rgb_light",
+                  "name": "ESP_Lamp",
+                  "show_state": true
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "entity": "sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_tvoc_level",
+                  "name": "TVOC"
+                },
+                {
+                  "show_name": true,
+                  "show_icon": true,
+                  "type": "button",
+                  "tap_action": {
+                    "action": "more-info"
+                  },
+                  "entity": "sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_co2_level"
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "New section"
+                },
+                {
+                  "title": "History",
+                  "type": "history-graph",
+                  "hours_to_show": 1,
+                  "entities": [
+                    "light.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_rgb_light",
+                    "sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_co2_level",
+                    "sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_tvoc_level"
+                  ]
+                }
+              ]
+            }
+          ],
+          "cards": []
+        }
+      ]
+    }
+  }
+}

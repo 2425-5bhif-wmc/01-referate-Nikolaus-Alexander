@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "core.restore_state",
+  "data": [
+    {
+      "state": {"entity_id":"person.nik","state":"unknown","attributes":{"editable":true,"id":"nik","device_trackers":[],"user_id":"c0047fd1c52f4b70a88159d36aad2622","friendly_name":"nik"},"last_changed":"2025-01-06T12:14:42.748757+00:00","last_reported":"2025-01-06T12:14:49.817029+00:00","last_updated":"2025-01-06T12:14:49.817029+00:00","context":{"id":"01JGXRM2ES52WVZM1YXDG68H81","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-06T14:21:28.936360+00:00"
+    },
+    {
+      "state": {"entity_id":"conversation.home_assistant","state":"unknown","attributes":{"friendly_name":"Home Assistant","supported_features":1},"last_changed":"2025-01-06T12:14:43.967837+00:00","last_reported":"2025-01-06T12:14:43.967837+00:00","last_updated":"2025-01-06T12:14:43.967837+00:00","context":{"id":"01JGXRKWQZ29G1WC4XXZR41VBF","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-06T14:21:28.936360+00:00"
+    },
+    {
+      "state": {"entity_id":"light.wmc_nik_esp_wmc_nik_esp_rgb_light","state":"unavailable","attributes":{"supported_color_modes":["rgb"],"friendly_name":"wmc-nik-esp wmc-nik-esp RGB Light","supported_features":40},"last_changed":"2025-01-06T13:59:41.047184+00:00","last_reported":"2025-01-06T13:59:41.049902+00:00","last_updated":"2025-01-06T13:59:41.047184+00:00","context":{"id":"01JGXYM27QR25TZVWV1K2R5JYP","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-06T14:21:28.936360+00:00"
+    },
+    {
+      "state": {"entity_id":"light.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_rgb_light","state":"unavailable","attributes":{"supported_color_modes":["rgb"],"friendly_name":"Lamp_ESP32_Nik","supported_features":40},"last_changed":"2025-01-03T16:05:12.247315+00:00","last_reported":"2025-01-03T16:53:48.039600+00:00","last_updated":"2025-01-03T16:05:12.808523+00:00","context":{"id":"01JGPEKRF8TGMAQR7JA56HTP0P","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-03T18:51:04.955117+00:00"
+    },
+    {
+      "state": {"entity_id":"light.wmc_iot_nikolaus_esp_wmc_iot_nikolaus_esp_rgb_light","state":"unavailable","attributes":{"supported_color_modes":["rgb"],"friendly_name":"wmc-nik-esp wmc-iot-nikolaus-esp RGB Light","supported_features":40},"last_changed":"2025-01-03T16:05:12.247401+00:00","last_reported":"2025-01-03T16:59:47.580457+00:00","last_updated":"2025-01-03T16:59:47.580457+00:00","context":{"id":"01JGPHQPFWQJA6M9HRSRHM7S5N","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-03T18:51:04.971125+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_co2_level","state":"unavailable","attributes":{"state_class":"measurement","unit_of_measurement":"ppm","device_class":"carbon_dioxide","icon":"mdi:molecule-co2","friendly_name":"ESP_CO2"},"last_changed":"2025-01-03T16:05:12.247364+00:00","last_reported":"2025-01-03T16:53:48.039729+00:00","last_updated":"2025-01-03T16:05:12.861063+00:00","context":{"id":"01JGPEKRGXYCMH0C3VQKXVGTAJ","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": "ppm"
+      },
+      "last_seen": "2025-01-03T18:50:12.028290+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_tvoc_level","state":"unavailable","attributes":{"state_class":"measurement","unit_of_measurement":"ppb","device_class":"volatile_organic_compounds_parts","icon":"mdi:air-filter","friendly_name":"ESP_TVOC_Level"},"last_changed":"2025-01-03T16:05:12.247384+00:00","last_reported":"2025-01-03T16:53:48.039753+00:00","last_updated":"2025-01-03T16:05:12.863586+00:00","context":{"id":"01JGPEKRGZSRYBCWK0MAWWWWW5","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": "ppb"
+      },
+      "last_seen": "2025-01-03T18:50:12.044267+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.wmc_iot_nikolaus_esp_wmc_iot_nikolaus_esp_co2_level","state":"unknown","attributes":{"state_class":"measurement","unit_of_measurement":"ppm","device_class":"carbon_dioxide","icon":"mdi:molecule-co2","friendly_name":"wmc-nik-esp wmc-iot-nikolaus-esp CO2 Level"},"last_changed":"2025-01-03T18:43:25.164743+00:00","last_reported":"2025-01-03T18:43:25.164743+00:00","last_updated":"2025-01-03T18:43:25.164743+00:00","context":{"id":"01JGPQNEBCFG4STE1GA89E0ENY","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": "ppm"
+      },
+      "last_seen": "2025-01-03T18:50:24.449884+00:00"
+    },
+    {
+      "state": {"entity_id":"sensor.wmc_iot_nikolaus_esp_wmc_iot_nikolaus_esp_tvoc_level","state":"unknown","attributes":{"state_class":"measurement","unit_of_measurement":"ppb","device_class":"volatile_organic_compounds_parts","icon":"mdi:radiator","friendly_name":"wmc-nik-esp wmc-iot-nikolaus-esp TVOC Level"},"last_changed":"2025-01-03T18:43:25.164835+00:00","last_reported":"2025-01-03T18:43:25.164835+00:00","last_updated":"2025-01-03T18:43:25.164835+00:00","context":{"id":"01JGPQNEBCACH6Q03KPH7XDP68","parent_id":null,"user_id":null}},
+      "extra_data": {
+        "native_value": null,
+        "native_unit_of_measurement": "ppb"
+      },
+      "last_seen": "2025-01-03T18:50:24.470633+00:00"
+    },
+    {
+      "state": {"entity_id":"automation.light_turn_of_automation","state":"on","attributes":{"id":"1735985230493","last_triggered":null,"mode":"single","current":0,"friendly_name":"Light turn of Automation"},"last_changed":"2025-01-04T10:07:21.410631+00:00","last_reported":"2025-01-04T10:07:21.411042+00:00","last_updated":"2025-01-04T10:07:21.410631+00:00","context":{"id":"01JGRCH7A2H5DV00BCG21EE0V8","parent_id":null,"user_id":null}},
+      "extra_data": null,
+      "last_seen": "2025-01-04T11:37:41.956669+00:00"
+    }
+  ]
+}

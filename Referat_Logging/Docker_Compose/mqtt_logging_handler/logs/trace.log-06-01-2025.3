@@ -1,0 +1,62 @@
+2025-01-06 13:12:50,978 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [io.sma.rea.mes.mqtt] (main) Create MQTT Client for nik:02db81198fbe4865a79e6ead5ba827caeb324f820b1c755c8135777e6461d4ea3ca27e41459fc5e058ca6832460aad14e06e68489ea10eccc3630932ab7312b6@mqtt_for_home_assistant:1883<>-[].
+2025-01-06 13:12:51,175 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [io.quarkus] (main) mqtt_logging_handler 1.0-SNAPSHOT on JVM (powered by Quarkus 3.17.5) started in 1.554s. Listening on: http://0.0.0.0:8080
+2025-01-06 13:12:51,179 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [io.quarkus] (main) Profile prod activated. 
+2025-01-06 13:12:51,182 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [io.quarkus] (main) Installed features: [cdi, logging-gelf, messaging, messaging-mqtt, qute, rest, rest-qute, smallrye-context-propagation, vertx]
+2025-01-06 13:12:51,193 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [io.ver.mqt.imp.MqttClientImpl] (vert.x-eventloop-thread-0) Connection with mqtt_for_home_assistant:1883 established successfully
+2025-01-06 13:12:51,249 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [io.sma.rea.mes.mqtt] (vert.x-eventloop-thread-0) Subscription success on topic #, Max QoS 0.
+2025-01-06 13:12:51,320 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] WARN  [at.htl.MqttMessageLogger] (vert.x-eventloop-thread-1) wmc-nik-esp/status offline
+2025-01-06 13:12:51,331 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [at.htl.MqttMessageLogger] (vert.x-eventloop-thread-1) wmc-nik-esp/light/status {"color_mode":"rgb","state":"ON","brightness":255,"color":{"r":38,"g":59,"b":255}}
+2025-01-06 13:12:51,334 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [at.htl.MqttMessageLogger] (vert.x-eventloop-thread-1) wmc-nik-esp/light/wmc-nik-esp_rgb_light/state {"color_mode":"rgb","state":"OFF","brightness":255,"color":{"r":255,"g":255,"b":255}}
+2025-01-06 13:12:51,337 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [at.htl.MqttMessageLogger] (vert.x-eventloop-thread-1) homeassistant/light/wmc-nik-esp/wmc-nik-esp_rgb_light/config {"schema":"json","clrm":true,"supported_color_modes":["rgb"],"brightness":true,"name":"wmc-nik-esp RGB Light","stat_t":"wmc-nik-esp/light/wmc-nik-esp_rgb_light/state","cmd_t":"wmc-nik-esp/light/wmc-nik-esp_rgb_light/command","avty_t":"wmc-nik-esp/status","uniq_id":"ESPlightwmc-nik-esp_rgb_light","dev":{"ids":"e465b811e17c","name":"wmc-nik-esp","sw":"2024.12.2 (Jan  5 2025, 19:25:48)","mdl":"esp32dev","mf":"Espressif","cns":[["mac","e465b811e17c"]]}}
+2025-01-06 13:12:51,340 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [at.htl.MqttMessageLogger] (vert.x-eventloop-thread-1) esphome/discover/wmc-nik-esp {"ip":"192.168.4.100","name":"wmc-nik-esp","version":"2024.12.2","mac":"e465b811e17c","platform":"ESP32","board":"esp32dev","network":"wifi"}
+2025-01-06 13:12:55,588 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] WARN  [at.htl.MqttMessageLogger] (vert.x-eventloop-thread-1) homeassistant/status online
+2025-01-06 13:18:31,887 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] WARN  [at.htl.MqttMessageLogger] (vert.x-eventloop-thread-1) homeassistant/status offline
+2025-01-06 13:18:31,892 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] INFO  [io.sma.rea.mes.mqt.ses.imp.MqttClientSessionImpl] (vert.x-eventloop-thread-0) Connection closed: Connection closed
+2025-01-06 13:18:32,915 856ad5b1d309 /usr/local/openjdk-23/bin/java[1] ERROR [io.ver.mqt.imp.MqttClientImpl] (vert.x-eventloop-thread-0) Can't connect to mqtt_for_home_assistant:1883: java.net.UnknownHostException: mqtt_for_home_assistant: Temporary failure in name resolution
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.base/java.net.Inet6AddressImpl.lookupAllHostAddr(Inet6AddressImpl.java:52)
+	at java.base/java.net.InetAddress$PlatformResolver.lookupByName(InetAddress.java:1221)
+	at java.base/java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1817)
+	at java.base/java.net.InetAddress$NameServiceAddresses.get(InetAddress.java:1149)
+	at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1807)
+	at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1676)
+	at java.base/java.net.InetAddress.getByName(InetAddress.java:1578)
+	at io.netty.util.internal.SocketUtils$8.run(SocketUtils.java:156)
+	at io.netty.util.internal.SocketUtils$8.run(SocketUtils.java:153)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:571)
+	at io.netty.util.internal.SocketUtils.addressByName(SocketUtils.java:153)
+	at io.netty.resolver.DefaultNameResolver.doResolve(DefaultNameResolver.java:41)
+	at io.netty.resolver.SimpleNameResolver.resolve(SimpleNameResolver.java:61)
+	at io.netty.resolver.SimpleNameResolver.resolve(SimpleNameResolver.java:53)
+	at io.netty.resolver.InetSocketAddressResolver.doResolve(InetSocketAddressResolver.java:55)
+	at io.netty.resolver.InetSocketAddressResolver.doResolve(InetSocketAddressResolver.java:31)
+	at io.netty.resolver.AbstractAddressResolver.resolve(AbstractAddressResolver.java:106)
+	at io.netty.bootstrap.Bootstrap.doResolveAndConnect0(Bootstrap.java:220)
+	at io.netty.bootstrap.Bootstrap.doResolveAndConnect(Bootstrap.java:171)
+	at io.netty.bootstrap.Bootstrap.connect(Bootstrap.java:148)
+	at io.vertx.core.net.impl.ChannelProvider.handleConnect(ChannelProvider.java:152)
+	at io.vertx.core.net.impl.ChannelProvider.connect(ChannelProvider.java:103)
+	at io.vertx.core.net.impl.ChannelProvider.connect(ChannelProvider.java:89)
+	at io.vertx.core.net.impl.NetClientImpl.connectInternal2(NetClientImpl.java:308)
+	at io.vertx.core.net.impl.NetClientImpl.lambda$connectInternal$2(NetClientImpl.java:273)
+	at io.vertx.core.impl.future.FutureImpl$4.onSuccess(FutureImpl.java:176)
+	at io.vertx.core.impl.future.FutureBase.emitSuccess(FutureBase.java:66)
+	at io.vertx.core.impl.future.FutureImpl.addListener(FutureImpl.java:231)
+	at io.vertx.core.impl.future.FutureImpl.onComplete(FutureImpl.java:199)
+	at io.vertx.core.net.impl.NetClientImpl.connectInternal(NetClientImpl.java:271)
+	at io.vertx.core.net.impl.NetClientImpl.connect(NetClientImpl.java:228)
+	at io.vertx.core.net.impl.NetClientImpl.connect(NetClientImpl.java:204)
+	at io.vertx.core.net.impl.NetClientImpl.connect(NetClientImpl.java:137)
+	at io.vertx.mqtt.impl.MqttClientImpl.lambda$doConnect$3(MqttClientImpl.java:204)
+	at io.vertx.core.impl.ContextInternal.dispatch(ContextInternal.java:270)
+	at io.vertx.core.impl.ContextInternal.dispatch(ContextInternal.java:252)
+	at io.vertx.core.impl.ContextInternal.lambda$runOnContext$0(ContextInternal.java:50)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+

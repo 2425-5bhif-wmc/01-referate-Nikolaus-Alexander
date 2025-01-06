@@ -1,0 +1,95 @@
+services:
+  elasticsearch:
+    image: docker.io/elastic/elasticsearch:7.10.2
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      discovery.type: "single-node"
+      cluster.routing.allocation.disk.threshold_enabled: false
+      xpack.security.enabled: "false"
+      xpack.security.transport.ssl.enabled: "false"
+    volumes:
+      - ./elasticsearch:/usr/share/elasticsearch/data
+    networks:
+      - graylog_network
+
+  mongo:
+    image: mongo:4.0
+    container_name: mongo
+    networks:
+      - graylog_network
+    volumes:
+      - ./mongo:/data/db
+
+  graylog:
+    image: graylog/graylog:4.3.0
+    container_name: graylog
+    ports:
+      - "9000:9000"
+      - "12201:12201/udp"
+      - "1514:1514"
+    environment:
+      GRAYLOG_HTTP_EXTERNAL_URI: "http://127.0.0.1:9000/"
+      GRAYLOG_PASSWORD_SECRET: "forpasswordencryption"
+      GRAYLOG_ROOT_PASSWORD_SHA2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+    networks:
+      - graylog_network
+    depends_on:
+      - elasticsearch
+      - mongo
+
+  mqtt_logging_handler:
+    image: openjdk:23-jdk-slim
+    container_name: mqtt_logging_handler
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../Backend/mqtt_logging_handler/target:/app
+      - ./mqtt_logging_handler/logs:/app/logs
+    command: java -jar /app/quarkus-app/quarkus-run.jar
+    networks:
+      - graylog_network
+    depends_on:
+      - graylog
+      - elasticsearch
+      - mongo
+
+##Homeassistant
+#  mqtt_for_home_assistant:
+#    image: eclipse-mosquitto
+#    container_name: mqtt_for_home_assistant
+#    ports:
+#      - "1883:1883"
+#    networks:
+#      - graylog_network
+#      - home_assistant_network
+#    volumes:
+#      - ./mosquitto/config:/mosquitto/config
+#      - ./mosquitto/data:/mosquitto/data
+#      - ./mosquitto/log:/mosquitto/log
+#    restart: always
+#
+#  home_assistant:
+#    image: homeassistant/home-assistant:stable
+#    container_name: home_assistant
+#    ports:
+#      - "8123:8123"
+#    networks:
+#      - home_assistant_network
+#    volumes:
+#      - ./homeassistant:/config
+#    environment:
+#      - TZ=Europe/Berlin
+#    restart: always
+#    depends_on:
+#      - mqtt_for_home_assistant
+
+networks:
+  graylog_network:
+    driver: bridge
+#
+#  home_assistant_network:
+#    driver: bridge

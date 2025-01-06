@@ -36,3 +36,53 @@ Temporary Items
 dist/
 docs/slides/revealjs
 .idea/
+
+# Docker
+**/Dockerfile*
+**/docker-compose.yml
+**/docker-compose.override.yml
+**/docker-compose.env
+**/docker-compose.*.yml
+.docker/
+docker/
+*.docker
+docker-compose.override.yml
+
+# ESP32/ESPHome
+*.bin
+*.elf
+*.map
+*.hex
+*.bak
+esphome/.pio/
+esphome/build/
+esphome/.esphome/
+esphome/secrets.yaml
+
+# Home Assistant
+homeassistant/.storage/
+homeassistant/.vscode/
+homeassistant/.env
+homeassistant/config/.cloud/
+homeassistant/config/.auth/
+homeassistant/config/.configuration.yaml*
+homeassistant/config/.secret.yaml*
+homeassistant/config/.storage/
+homeassistant/config/.homeassistant/
+
+# Quarkus / Java
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+target/
+*.iml
+*.log
+*.swp
+.mvn/
+.settings/
+.vscode/
+build/
+out/

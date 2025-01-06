@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_iot",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Home",
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "New section"
+                },
+                {
+                  "type": "tile",
+                  "entity": "light.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_rgb_light"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_co2_level"
+                },
+                {
+                  "type": "tile",
+                  "entity": "sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_tvoc_level"
+                }
+              ],
+              "column_span": 1
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "heading",
+                  "heading": "New section"
+                },
+                {
+                  "title": "History",
+                  "type": "history-graph",
+                  "hours_to_show": 2,
+                  "entities": [
+                    "light.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_rgb_light",
+                    "sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_co2_level",
+                    "sensor.wmc_iot_referat_nikolaus_esp_1_wmc_iot_referat_nikolaus_esp_1_tvoc_level"
+                  ],
+                  "grid_options": {
+                    "columns": 36,
+                    "rows": 8
+                  }
+                }
+              ],
+              "column_span": 3
+            }
+          ],
+          "cards": []
+        }
+      ]
+    }
+  }
+}
