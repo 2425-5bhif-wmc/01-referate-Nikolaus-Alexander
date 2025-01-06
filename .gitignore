@@ -86,3 +86,6 @@ target/
 .vscode/
 build/
 out/
+Referat_Logging/Docker_Compose/elasticsearch_7.10.2/
+Referat_Logging/Docker_Compose/elasticsearch_8.15.0/
+Referat_Logging/Docker_Compose/mongo/
