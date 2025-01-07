@@ -581,34 +581,38 @@ pre.rouge .gs {
 <li><a href="#_ausführen">2.4. Ausführen</a></li>
 </ul>
 </li>
-<li><a href="#_rest_get_logger">3. REST-Get Logger</a></li>
-<li><a href="#_mqtt_logger">4. MQTT Logger</a></li>
-<li><a href="#_graylog_2">5. Graylog</a>
+<li><a href="#_mqtt_logger">3. MQTT_Logger</a>
 <ul class="sectlevel2">
-<li><a href="#_inject_logger_input">5.1. Inject Logger (Input)</a></li>
-<li><a href="#_logging_levels">5.2. Logging  Levels</a></li>
+<li><a href="#_rest_get_logger">3.1. REST-Get Logger</a></li>
+<li><a href="#_mqtt_logger_2">3.2. MQTT Logger</a></li>
 </ul>
 </li>
-<li><a href="#_alternativen_zu_graylog">6. Alternativen zu Graylog</a>
+<li><a href="#_graylog_2">4. Graylog</a>
 <ul class="sectlevel2">
-<li><a href="#_elk_stack_elasticsearch_logstash_kibana">6.1. ELK Stack (Elasticsearch, Logstash, Kibana)</a></li>
-<li><a href="#_efk_stack_elasticsearch_fluentd_kibana">6.2. EFK Stack (Elasticsearch, Fluentd, Kibana)</a></li>
-<li><a href="#_loki_mit_grafana">6.3. Loki (mit Grafana)</a></li>
+<li><a href="#_inject_logger_input">4.1. Inject Logger (Input)</a></li>
+<li><a href="#_logging_levels">4.2. Logging  Levels</a></li>
 </ul>
 </li>
-<li><a href="#_gelf_alternativen_graylog_extended_log_format">7. GELF + Alternativen (Graylog Extended Log Format)</a>
+<li><a href="#_alternativen_zu_graylog">5. Alternativen zu Graylog</a>
 <ul class="sectlevel2">
-<li><a href="#_json">7.1. JSON</a></li>
-<li><a href="#_ecs_elastic_common_schema_format">7.2. ECS (Elastic Common Schema) format</a></li>
+<li><a href="#_elk_stack_elasticsearch_logstash_kibana">5.1. ELK Stack (Elasticsearch, Logstash, Kibana)</a></li>
+<li><a href="#_efk_stack_elasticsearch_fluentd_kibana">5.2. EFK Stack (Elasticsearch, Fluentd, Kibana)</a></li>
+<li><a href="#_loki_mit_grafana">5.3. Loki (mit Grafana)</a></li>
 </ul>
 </li>
-<li><a href="#_centralized_decentralized_logging">8. Centralized / Decentralized Logging</a>
+<li><a href="#_gelf_alternativen_graylog_extended_log_format">6. GELF + Alternativen (Graylog Extended Log Format)</a>
 <ul class="sectlevel2">
-<li><a href="#_centralized_logging">8.1. Centralized Logging</a></li>
-<li><a href="#_decentralized_logging">8.2. Decentralized Logging</a></li>
+<li><a href="#_json">6.1. JSON</a></li>
+<li><a href="#_ecs_elastic_common_schema_format">6.2. ECS (Elastic Common Schema) format</a></li>
 </ul>
 </li>
-<li><a href="#_links">9. Links</a></li>
+<li><a href="#_centralized_decentralized_logging">7. Centralized / Decentralized Logging</a>
+<ul class="sectlevel2">
+<li><a href="#_centralized_logging">7.1. Centralized Logging</a></li>
+<li><a href="#_decentralized_logging">7.2. Decentralized Logging</a></li>
+</ul>
+</li>
+<li><a href="#_links">8. Links</a></li>
 </ul>
 </div>
 </div>
@@ -807,8 +811,38 @@ pre.rouge .gs {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_rest_get_logger"><a class="anchor" href="#_rest_get_logger"></a>3. REST-Get Logger</h2>
+<h2 id="_mqtt_logger"><a class="anchor" href="#_mqtt_logger"></a>3. MQTT_Logger</h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="title">application.properties</div>
+<div class="content">
+<pre class="rouge highlight"><code>mp.messaging.incoming.mqtt.connector=smallrye-mqtt
+mp.messaging.incoming.mqtt.topic=#
+
+mp.messaging.incoming.mqtt.host=mqtt_for_home_assistant
+
+mp.messaging.incoming.mqtt.username=nik
+mp.messaging.incoming.mqtt.password=nik
+mp.messaging.incoming.mqtt.port=1883
+mp.messaging.incoming.mqtt.qos=0
+
+#GreyLog Config
+quarkus.log.handler.gelf.enabled=true
+quarkus.log.handler.gelf.host=graylog
+quarkus.log.handler.gelf.port=12201
+
+#Log Files (Log Rotation)
+quarkus.log.file.enable=true
+quarkus.log.level=INFO
+quarkus.log.file.path=/app/logs/trace.log
+
+quarkus.log.file.rotation.max-file-size=5K
+quarkus.log.file.rotation.file-suffix=-dd-MM-yyyy
+quarkus.log.file.rotation.max-backup-index=3</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rest_get_logger"><a class="anchor" href="#_rest_get_logger"></a>3.1. REST-Get Logger</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="java"><span class="nd">@Path</span><span class="o">(</span><span class="s">"/hello"</span><span class="o">)</span>
@@ -825,10 +859,8 @@ pre.rouge .gs {
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_mqtt_logger"><a class="anchor" href="#_mqtt_logger"></a>4. MQTT Logger</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_mqtt_logger_2"><a class="anchor" href="#_mqtt_logger_2"></a>3.2. MQTT Logger</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="java"><span class="nd">@ApplicationScoped</span>
@@ -872,24 +904,25 @@ pre.rouge .gs {
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_graylog_2"><a class="anchor" href="#_graylog_2"></a>5. Graylog</h2>
+<h2 id="_graylog_2"><a class="anchor" href="#_graylog_2"></a>4. Graylog</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_inject_logger_input"><a class="anchor" href="#_inject_logger_input"></a>5.1. Inject Logger (Input)</h3>
+<h3 id="_inject_logger_input"><a class="anchor" href="#_inject_logger_input"></a>4.1. Inject Logger (Input)</h3>
 <div class="paragraph">
 <p><a href="http://localhost:9000/system/inputs">Graylog/Input</a></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_logging_levels"><a class="anchor" href="#_logging_levels"></a>5.2. Logging  Levels</h3>
+<h3 id="_logging_levels"><a class="anchor" href="#_logging_levels"></a>4.2. Logging  Levels</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/log_level.png" alt="log level">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_im_graylog"><a class="anchor" href="#_im_graylog"></a>5.2.1. Im Graylog:</h4>
+<h4 id="_im_graylog"><a class="anchor" href="#_im_graylog"></a>4.2.1. Im Graylog:</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -923,10 +956,10 @@ pre.rouge .gs {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_alternativen_zu_graylog"><a class="anchor" href="#_alternativen_zu_graylog"></a>6. Alternativen zu Graylog</h2>
+<h2 id="_alternativen_zu_graylog"><a class="anchor" href="#_alternativen_zu_graylog"></a>5. Alternativen zu Graylog</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_elk_stack_elasticsearch_logstash_kibana"><a class="anchor" href="#_elk_stack_elasticsearch_logstash_kibana"></a>6.1. ELK Stack (Elasticsearch, Logstash, Kibana)</h3>
+<h3 id="_elk_stack_elasticsearch_logstash_kibana"><a class="anchor" href="#_elk_stack_elasticsearch_logstash_kibana"></a>5.1. ELK Stack (Elasticsearch, Logstash, Kibana)</h3>
 <div class="paragraph">
 <p>Vorteile:</p>
 </div>
@@ -958,7 +991,7 @@ pre.rouge .gs {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_efk_stack_elasticsearch_fluentd_kibana"><a class="anchor" href="#_efk_stack_elasticsearch_fluentd_kibana"></a>6.2. EFK Stack (Elasticsearch, Fluentd, Kibana)</h3>
+<h3 id="_efk_stack_elasticsearch_fluentd_kibana"><a class="anchor" href="#_efk_stack_elasticsearch_fluentd_kibana"></a>5.2. EFK Stack (Elasticsearch, Fluentd, Kibana)</h3>
 <div class="paragraph">
 <p>Vorteile:</p>
 </div>
@@ -987,13 +1020,13 @@ pre.rouge .gs {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_loki_mit_grafana"><a class="anchor" href="#_loki_mit_grafana"></a>6.3. Loki (mit Grafana)</h3>
+<h3 id="_loki_mit_grafana"><a class="anchor" href="#_loki_mit_grafana"></a>5.3. Loki (mit Grafana)</h3>
 
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_gelf_alternativen_graylog_extended_log_format"><a class="anchor" href="#_gelf_alternativen_graylog_extended_log_format"></a>7. GELF + Alternativen (Graylog Extended Log Format)</h2>
+<h2 id="_gelf_alternativen_graylog_extended_log_format"><a class="anchor" href="#_gelf_alternativen_graylog_extended_log_format"></a>6. GELF + Alternativen (Graylog Extended Log Format)</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -1011,11 +1044,11 @@ pre.rouge .gs {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_json"><a class="anchor" href="#_json"></a>7.1. JSON</h3>
+<h3 id="_json"><a class="anchor" href="#_json"></a>6.1. JSON</h3>
 
 </div>
 <div class="sect2">
-<h3 id="_ecs_elastic_common_schema_format"><a class="anchor" href="#_ecs_elastic_common_schema_format"></a>7.2. ECS (Elastic Common Schema) format</h3>
+<h3 id="_ecs_elastic_common_schema_format"><a class="anchor" href="#_ecs_elastic_common_schema_format"></a>6.2. ECS (Elastic Common Schema) format</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code>{
@@ -1031,10 +1064,10 @@ pre.rouge .gs {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_centralized_decentralized_logging"><a class="anchor" href="#_centralized_decentralized_logging"></a>8. Centralized / Decentralized Logging</h2>
+<h2 id="_centralized_decentralized_logging"><a class="anchor" href="#_centralized_decentralized_logging"></a>7. Centralized / Decentralized Logging</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_centralized_logging"><a class="anchor" href="#_centralized_logging"></a>8.1. Centralized Logging</h3>
+<h3 id="_centralized_logging"><a class="anchor" href="#_centralized_logging"></a>7.1. Centralized Logging</h3>
 <div class="paragraph">
 <p>Logs aus verschiedenen Quellen werden in einem Platz zusammengesammelt.
 Das bietet eine vereinte Suche und Analyse.</p>
@@ -1080,7 +1113,7 @@ Das bietet eine vereinte Suche und Analyse.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_decentralized_logging"><a class="anchor" href="#_decentralized_logging"></a>8.2. Decentralized Logging</h3>
+<h3 id="_decentralized_logging"><a class="anchor" href="#_decentralized_logging"></a>7.2. Decentralized Logging</h3>
 <div class="paragraph">
 <p>Logs werden lokal gespeichert, was unabhängig vom Netzwerk funktioniert</p>
 </div>
@@ -1127,7 +1160,7 @@ Das bietet eine vereinte Suche und Analyse.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_links"><a class="anchor" href="#_links"></a>9. Links</h2>
+<h2 id="_links"><a class="anchor" href="#_links"></a>8. Links</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1153,7 +1186,7 @@ Das bietet eine vereinte Suche und Analyse.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-07 12:52:04 UTC
+Last updated 2025-01-07 13:06:05 UTC
 </div>
 </div>
 </body>
