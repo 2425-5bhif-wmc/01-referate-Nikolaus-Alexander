@@ -13,89 +13,324 @@ ifndef::backend[:backend: html5]
 
 image::network_docker_compose.png[]
 
-== Docker Compose File
+=== Ablauf
+
+* Demo im Homeassistant
+* Vorzeigen des Graylog UIs
+* Theorie dahinter
+
+== Docker Compose Files
+
+.Docker Compose File (graylog.yml)
+[source,dockerfile]
+----
+services:
+  elasticsearch:
+    image: docker.io/elastic/elasticsearch:7.10.2
+    container_name: elasticsearch_7.10.2
+    ports:
+      - "9200:9200"
+#      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      discovery.type: "single-node"
+      cluster.routing.allocation.disk.threshold_enabled: false
+      xpack.security.enabled: "false"
+      xpack.security.transport.ssl.enabled: "false"
+    volumes:
+      - ./elasticsearch_7.10.2:/usr/share/elasticsearch/data
+    networks:
+      - graylog_network
+
+  mongo:
+    image: mongo:4.0
+    container_name: mongo
+    networks:
+      - graylog_network
+    volumes:
+      - ./mongo:/data/db
+
+  graylog:
+    image: graylog/graylog:4.3.0
+    container_name: graylog
+    ports:
+      - "9000:9000"
+      - "12201:12201/udp"
+      - "1514:1514"
+    environment:
+      GRAYLOG_HTTP_EXTERNAL_URI: "http://127.0.0.1:9000/"
+      GRAYLOG_PASSWORD_SECRET: "forpasswordencryption"
+      GRAYLOG_ROOT_PASSWORD_SHA2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+    networks:
+      - graylog_network
+    depends_on:
+      - elasticsearch
+      - mongo
+
+  mqtt_logging_handler:
+    image: openjdk:23-jdk-slim
+    container_name: mqtt_logging_handler
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../Backend/mqtt_logging_handler/target:/app
+      - ./mqtt_logging_handler/logs:/app/logs
+    command: java -jar /app/quarkus-app/quarkus-run.jar
+    networks:
+      - graylog_network
+    depends_on:
+      - graylog
+      - elasticsearch
+      - mongo
+
+  mqtt_for_home_assistant:
+    image: eclipse-mosquitto
+    container_name: mqtt_for_home_assistant
+    ports:
+      - "1883:1883"
+    networks:
+      - graylog_network
+      - docker_compose_home_assistant_network
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+
+networks:
+  graylog_network:
+    driver: bridge
+
+  docker_compose_home_assistant_network:
+    external: true
+----
+
+=== Mongo
+
+Dient als Datenbank für die Graylog Konfiguration
+
+Bsp:
+
+* Users
+* Dashboard settings
+
+=== Graylog
+
+Fungiert zur Visualisierung der Logs
+
+-> Weiterleiten an Elasticsearch
+
+=== Elasticsearch
+
+Speichert die Logs aus Graylog
+
+.Docker Compose File (home_assistant.yml)
+[source,dockerfile]
+----
+services:
+  home_assistant:
+    image: homeassistant/home-assistant:stable
+    container_name: home_assistant
+    ports:
+      - "8123:8123"
+    networks:
+      - home_assistant_network
+    volumes:
+      - ./homeassistant:/config
+    environment:
+      - TZ=Europe/Berlin
+    restart: always
+
+networks:
+  home_assistant_network:
+    driver: bridge
+----
+
+=== Ausführen
+
+.Im Quarkus Logger (mqtt_logging_handler)
+[source,shell]
+----
+ mvn clean package
+
+----
+
+Im Docker Compose File holt man sich automatisch die .jar File
+
+.Im Docker_Compose Verzeichnis
+[source,shell]
+----
+docker compose -f home_assistant.yml up -d
+----
+
+[source,shell]
+----
+docker compose -f graylog.yml up -d
+----
 
 == HTML Logger
 
+[source,java]
+----
+@Path("/hello")
+public class HelloResource {
+    private static final Logger LOG = Logger.getLogger(MqttMessageLogger.class);
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        LOG.info("/hello was called");
+        return "Hello";
+    }
+}
+----
+
 == MQTT Logger
 
+[source,java]
+----
+@ApplicationScoped
+public class MqttMessageLogger {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss");
+
+    private static final Logger LOG = Logger.getLogger(MqttMessageLogger.class);
+
+    @Incoming("mqtt")
+    public CompletionStage<Void> onMqttMessage(Message<String> message) {
+
+        String payload = message.getPayload();
+
+        System.out.println("\n" + LocalDateTime.ofInstant(Instant.ofEpochMilli(System.currentTimeMillis()), ZoneId.systemDefault()).format(formatter));
+
+        System.out.println("Received message: " + payload);
+
+        Optional<String> topicNameOpt = message.getMetadata()
+                .get(ReceivingMqttMessageMetadata.class)
+                .map(metadata -> metadata.getMessage().topicName());
+
+        topicNameOpt.ifPresent(topicName -> {
+            String logMessage = topicName + " " + payload;
+            System.out.println("Sent to topic: " + topicName);
+
+            if (topicName.contains("/debug")) {
+                LOG.debug(logMessage);
+            } else if (payload.contains("offline") || payload.contains("online")) {
+                LOG.warn(logMessage);
+            } else if (payload.contains("error") || payload.contains("failure")) {
+                LOG.error(logMessage);
+            } else {
+                LOG.info(logMessage);
+            }
+        });
+
+        return CompletableFuture.completedFuture(null);
+    }
+}
+----
+
 == Graylog
-* Inject Logger (Input)
-* Logging with Gelf (Log Levels)
+
+=== Inject Logger (Input)
+
+link:http://localhost:9000/system/inputs[Graylog/Input]
+
+=== Logging  Levels
 
 image::log_level.png[]
+
+==== Im Graylog:
+
+* 0 - Emergency
+* 1 - Alert
+* 2 - Critical
+* 3 - Error
+* 4 - Warning
+* 5 - Notice
+* 6 - Informational
+* 7 - Debug
 
 == Alternativen zu Graylog
 
 === ELK Stack (Elasticsearch, Logstash, Kibana)
 
+* bekannte und weit verbreitete Lösung
+* Suchleistung ist überragend (Pfeilschnell)
+
 === EFK Stack (Elasticsearch, Fluentd, Kibana)
 
 === Loki (mit Grafana)
 
-== GELF Alternativen (Graylog Extended Log Format)
+== GELF + Alternativen (Graylog Extended Log Format)
+
+[source]
+----
+{
+  "version": "1.1",
+  "host": "example.org",
+  "short_message": "A short message that helps you identify what is going on",
+  "full_message": "Backtrace here\n\nmore stuff",
+  "timestamp": 1385053862.3072,
+  "level": 1,
+  "_user_id": 9001,
+  "_some_info": "foo",
+  "_some_env_var": "bar"
+}
+----
+
+=== JSON
 
 === ECS (Elastic Common Schema) format
 
-== Summary
+[source]
+----
+{
+"@timestamp": "2023-01-01T12:00:00Z",
+"event.action": "authentication",
+"user.name": "jeeva_s",
+"source.ip": "172.1.1.1",
+"outcome": "success"
+}
+----
+
+== Centralized / Decentralized Logging
 
 === Centralized Logging
 
-Logs from various sources are collected in one location, offering unified search and analysis.
+Logs aus verschiedenen Quellen werden in einem Platz zusammengesammelt.
+Das bietet eine vereinte Suche und Analyse.
 
-Examples:
+Bsp:
 
-* ELK Stack
-* Splunk
 * Graylog
+* ELK / EFK Stack
 
-Pros:
+Vorteile:
 
-* Easier management
-* Real-time analytics
-* Powerful monitoring
+* leichteres Management / Monitoring
+* Real-time Analysen
 
-Cons:
+Nachteile:
 
-* Costly
-* Relies on robust network infrastructure
-
-Best For:
-
-* Security monitoring
-* Compliance and auditing
-* Root cause analysis in large, complex systems
+* Kostenintensiv
+* braucht eine starke Netzwerk-Infrastruktur
 
 === Decentralized Logging
 
-Logs are stored locally where events occur, functioning independently of the network.
+Logs werden lokal gespeichert, was unabhängig vom Netzwerk funktioniert
 
-Examples:
+Bsp:
 
 * rsyslog
-* Windows Event Log
-* Local file storage
+* lokale .log files
 
-Pros:
+Vorteile:
 
-* Simple setup
-* Reliable
-* Network-independent
+* Simples Setup
+* Netzwerk unabhängig
 
-Cons:
+Nachteile:
 
-* Harder to analyze
-* Time-consuming for large systems
-
-Best For:
-
-* Local troubleshooting
-* Low-latency or bandwidth-sensitive environments
-
-== Key Considerations
-
-* Scale & Complexity: Centralized logging is better for large-scale systems.
-* Network Reliability: Decentralized logging is more resilient to network issues.
+* schwer zu analysieren / auszuwerten
+* Fehlersuche ist zeitintensiv
 
 == Links
 
