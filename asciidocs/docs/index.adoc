@@ -147,7 +147,7 @@ networks:
 
 === Ausführen
 
-.Im Quarkus Logger (mqtt_logging_handler)
+.Im Quarkus Logger (mqtt_logging_handler) bei Änderungen
 [source,shell]
 ----
  mvn clean package
@@ -167,7 +167,7 @@ docker compose -f home_assistant.yml up -d
 docker compose -f graylog.yml up -d
 ----
 
-== HTML Logger
+== REST-Get Logger
 
 [source,java]
 ----
