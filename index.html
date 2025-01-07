@@ -645,84 +645,84 @@ pre.rouge .gs {
 <div class="listingblock">
 <div class="title">Docker Compose File (graylog.yml)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="dockerfile">services:
-  elasticsearch:
-    image: docker.io/elastic/elasticsearch:7.10.2
-    container_name: elasticsearch_7.10.2
-    ports:
-      - "9200:9200"
-#      - "9300:9300"
-    environment:
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-      discovery.type: "single-node"
-      cluster.routing.allocation.disk.threshold_enabled: false
-      xpack.security.enabled: "false"
-      xpack.security.transport.ssl.enabled: "false"
-    volumes:
-      - ./elasticsearch_7.10.2:/usr/share/elasticsearch/data
-    networks:
-      - graylog_network
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">services</span><span class="pi">:</span>
+  <span class="na">elasticsearch</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">docker.io/elastic/elasticsearch:7.10.2</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">elasticsearch_7.10.2</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">9200:9200"</span>
+<span class="c1">#      - "9300:9300"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">ES_JAVA_OPTS</span><span class="pi">:</span> <span class="s2">"</span><span class="s">-Xms512m</span><span class="nv"> </span><span class="s">-Xmx512m"</span>
+      <span class="na">discovery.type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">single-node"</span>
+      <span class="na">cluster.routing.allocation.disk.threshold_enabled</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="na">xpack.security.enabled</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+      <span class="na">xpack.security.transport.ssl.enabled</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./elasticsearch_7.10.2:/usr/share/elasticsearch/data</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">graylog_network</span>
 
-  mongo:
-    image: mongo:4.0
-    container_name: mongo
-    networks:
-      - graylog_network
-    volumes:
-      - ./mongo:/data/db
+  <span class="na">mongo</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mongo:4.0</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">mongo</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">graylog_network</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./mongo:/data/db</span>
 
-  graylog:
-    image: graylog/graylog:4.3.0
-    container_name: graylog
-    ports:
-      - "9000:9000"
-      - "12201:12201/udp"
-      - "1514:1514"
-    environment:
-      GRAYLOG_HTTP_EXTERNAL_URI: "http://127.0.0.1:9000/"
-      GRAYLOG_PASSWORD_SECRET: "forpasswordencryption"
-      GRAYLOG_ROOT_PASSWORD_SHA2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
-    networks:
-      - graylog_network
-    depends_on:
-      - elasticsearch
-      - mongo
+  <span class="na">graylog</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">graylog/graylog:4.3.0</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">graylog</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">9000:9000"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">12201:12201/udp"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">1514:1514"</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">GRAYLOG_HTTP_EXTERNAL_URI</span><span class="pi">:</span> <span class="s2">"</span><span class="s">http://127.0.0.1:9000/"</span>
+      <span class="na">GRAYLOG_PASSWORD_SECRET</span><span class="pi">:</span> <span class="s2">"</span><span class="s">forpasswordencryption"</span>
+      <span class="na">GRAYLOG_ROOT_PASSWORD_SHA2</span><span class="pi">:</span> <span class="s2">"</span><span class="s">8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">graylog_network</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">elasticsearch</span>
+      <span class="pi">-</span> <span class="s">mongo</span>
 
-  mqtt_logging_handler:
-    image: openjdk:23-jdk-slim
-    container_name: mqtt_logging_handler
-    ports:
-      - "8080:8080"
-    volumes:
-      - ../Backend/mqtt_logging_handler/target:/app
-      - ./mqtt_logging_handler/logs:/app/logs
-    command: java -jar /app/quarkus-app/quarkus-run.jar
-    networks:
-      - graylog_network
-    depends_on:
-      - graylog
-      - elasticsearch
-      - mongo
+  <span class="na">mqtt_logging_handler</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">openjdk:23-jdk-slim</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">mqtt_logging_handler</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">8080:8080"</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">../Backend/mqtt_logging_handler/target:/app</span>
+      <span class="pi">-</span> <span class="s">./mqtt_logging_handler/logs:/app/logs</span>
+    <span class="na">command</span><span class="pi">:</span> <span class="s">java -jar /app/quarkus-app/quarkus-run.jar</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">graylog_network</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">graylog</span>
+      <span class="pi">-</span> <span class="s">elasticsearch</span>
+      <span class="pi">-</span> <span class="s">mongo</span>
 
-  mqtt_for_home_assistant:
-    image: eclipse-mosquitto
-    container_name: mqtt_for_home_assistant
-    ports:
-      - "1883:1883"
-    networks:
-      - graylog_network
-      - docker_compose_home_assistant_network
-    volumes:
-      - ./mosquitto/config:/mosquitto/config
-      - ./mosquitto/data:/mosquitto/data
-      - ./mosquitto/log:/mosquitto/log
+  <span class="na">mqtt_for_home_assistant</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">eclipse-mosquitto</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">mqtt_for_home_assistant</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">1883:1883"</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">graylog_network</span>
+      <span class="pi">-</span> <span class="s">docker_compose_home_assistant_network</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./mosquitto/config:/mosquitto/config</span>
+      <span class="pi">-</span> <span class="s">./mosquitto/data:/mosquitto/data</span>
+      <span class="pi">-</span> <span class="s">./mosquitto/log:/mosquitto/log</span>
 
-networks:
-  graylog_network:
-    driver: bridge
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">graylog_network</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span>
 
-  docker_compose_home_assistant_network:
-    external: true</code></pre>
+  <span class="na">docker_compose_home_assistant_network</span><span class="pi">:</span>
+    <span class="na">external</span><span class="pi">:</span> <span class="kc">true</span></code></pre>
 </div>
 </div>
 <div class="sect2">
@@ -761,23 +761,23 @@ networks:
 <div class="listingblock">
 <div class="title">Docker Compose File (home_assistant.yml)</div>
 <div class="content">
-<pre class="rouge highlight"><code data-lang="dockerfile">services:
-  home_assistant:
-    image: homeassistant/home-assistant:stable
-    container_name: home_assistant
-    ports:
-      - "8123:8123"
-    networks:
-      - home_assistant_network
-    volumes:
-      - ./homeassistant:/config
-    environment:
-      - TZ=Europe/Berlin
-    restart: always
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">services</span><span class="pi">:</span>
+  <span class="na">home_assistant</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">homeassistant/home-assistant:stable</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">home_assistant</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">8123:8123"</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">home_assistant_network</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./homeassistant:/config</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">TZ=Europe/Berlin</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
 
-networks:
-  home_assistant_network:
-    driver: bridge</code></pre>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">home_assistant_network</span><span class="pi">:</span>
+    <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span></code></pre>
 </div>
 </div>
 </div>
@@ -1106,7 +1106,7 @@ Das bietet eine vereinte Suche und Analyse.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-07 12:25:16 UTC
+Last updated 2025-01-07 12:28:37 UTC
 </div>
 </div>
 </body>
