@@ -436,6 +436,120 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge, pre.rouge .w {
+  color: #24292f;
+  background-color: #f6f8fa;
+}
+pre.rouge .k, pre.rouge .kd, pre.rouge .kn, pre.rouge .kp, pre.rouge .kr, pre.rouge .kt, pre.rouge .kv {
+  color: #cf222e;
+}
+pre.rouge .gr {
+  color: #f6f8fa;
+}
+pre.rouge .gd {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+pre.rouge .nb {
+  color: #953800;
+}
+pre.rouge .nc {
+  color: #953800;
+}
+pre.rouge .no {
+  color: #953800;
+}
+pre.rouge .nn {
+  color: #953800;
+}
+pre.rouge .sr {
+  color: #116329;
+}
+pre.rouge .na {
+  color: #116329;
+}
+pre.rouge .nt {
+  color: #116329;
+}
+pre.rouge .gi {
+  color: #116329;
+  background-color: #dafbe1;
+}
+pre.rouge .kc {
+  color: #0550ae;
+}
+pre.rouge .l, pre.rouge .ld, pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #0550ae;
+}
+pre.rouge .sb {
+  color: #0550ae;
+}
+pre.rouge .bp {
+  color: #0550ae;
+}
+pre.rouge .ne {
+  color: #0550ae;
+}
+pre.rouge .nl {
+  color: #0550ae;
+}
+pre.rouge .py {
+  color: #0550ae;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #0550ae;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #0550ae;
+}
+pre.rouge .gh {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .s, pre.rouge .sa, pre.rouge .sc, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .se, pre.rouge .sh, pre.rouge .sx, pre.rouge .s1, pre.rouge .ss {
+  color: #0a3069;
+}
+pre.rouge .nd {
+  color: #8250df;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #8250df;
+}
+pre.rouge .err {
+  color: #f6f8fa;
+  background-color: #82071e;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cp, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6e7781;
+}
+pre.rouge .gl {
+  color: #6e7781;
+}
+pre.rouge .gt {
+  color: #6e7781;
+}
+pre.rouge .ni {
+  color: #24292f;
+}
+pre.rouge .si {
+  color: #24292f;
+}
+pre.rouge .ge {
+  color: #24292f;
+  font-style: italic;
+}
+pre.rouge .gs {
+  color: #24292f;
+  font-weight: bold;
+}
+</style>
+<style>
     pre.rouge .hll {
         background-color: #ffc;
         display: block;
@@ -454,11 +568,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_genereller_aufbau">1. Genereller Aufbau</a></li>
-<li><a href="#_docker_compose_file">2. Docker Compose File</a></li>
+<li><a href="#_genereller_aufbau">1. Genereller Aufbau</a>
+<ul class="sectlevel2">
+<li><a href="#_ablauf">1.1. Ablauf</a></li>
+</ul>
+</li>
+<li><a href="#_docker_compose_files">2. Docker Compose Files</a>
+<ul class="sectlevel2">
+<li><a href="#_mongo">2.1. Mongo</a></li>
+<li><a href="#_graylog">2.2. Graylog</a></li>
+<li><a href="#_elasticsearch">2.3. Elasticsearch</a></li>
+<li><a href="#_ausführen">2.4. Ausführen</a></li>
+</ul>
+</li>
 <li><a href="#_html_logger">3. HTML Logger</a></li>
 <li><a href="#_mqtt_logger">4. MQTT Logger</a></li>
-<li><a href="#_graylog">5. Graylog</a></li>
+<li><a href="#_graylog_2">5. Graylog</a>
+<ul class="sectlevel2">
+<li><a href="#_inject_logger_input">5.1. Inject Logger (Input)</a></li>
+<li><a href="#_logging_levels">5.2. Logging  Levels</a></li>
+</ul>
+</li>
 <li><a href="#_alternativen_zu_graylog">6. Alternativen zu Graylog</a>
 <ul class="sectlevel2">
 <li><a href="#_elk_stack_elasticsearch_logstash_kibana">6.1. ELK Stack (Elasticsearch, Logstash, Kibana)</a></li>
@@ -466,19 +596,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_loki_mit_grafana">6.3. Loki (mit Grafana)</a></li>
 </ul>
 </li>
-<li><a href="#_gelf_alternativen_graylog_extended_log_format">7. GELF Alternativen (Graylog Extended Log Format)</a>
+<li><a href="#_gelf_alternativen_graylog_extended_log_format">7. GELF + Alternativen (Graylog Extended Log Format)</a>
 <ul class="sectlevel2">
-<li><a href="#_ecs_elastic_common_schema_format">7.1. ECS (Elastic Common Schema) format</a></li>
+<li><a href="#_json">7.1. JSON</a></li>
+<li><a href="#_ecs_elastic_common_schema_format">7.2. ECS (Elastic Common Schema) format</a></li>
 </ul>
 </li>
-<li><a href="#_summary">8. Summary</a>
+<li><a href="#_centralized_decentralized_logging">8. Centralized / Decentralized Logging</a>
 <ul class="sectlevel2">
 <li><a href="#_centralized_logging">8.1. Centralized Logging</a></li>
 <li><a href="#_decentralized_logging">8.2. Decentralized Logging</a></li>
 </ul>
 </li>
-<li><a href="#_key_considerations">9. Key Considerations</a></li>
-<li><a href="#_links">10. Links</a></li>
+<li><a href="#_links">9. Links</a></li>
 </ul>
 </div>
 </div>
@@ -491,42 +621,303 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <img src="images/network_docker_compose.png" alt="network docker compose">
 </div>
 </div>
+<div class="sect2">
+<h3 id="_ablauf"><a class="anchor" href="#_ablauf"></a>1.1. Ablauf</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Demo im Homeassistant</p>
+</li>
+<li>
+<p>Vorzeigen des Graylog UIs</p>
+</li>
+<li>
+<p>Theorie dahinter</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_docker_compose_file"><a class="anchor" href="#_docker_compose_file"></a>2. Docker Compose File</h2>
+<h2 id="_docker_compose_files"><a class="anchor" href="#_docker_compose_files"></a>2. Docker Compose Files</h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="title">Docker Compose File (graylog.yml)</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="dockerfile">services:
+  elasticsearch:
+    image: docker.io/elastic/elasticsearch:7.10.2
+    container_name: elasticsearch_7.10.2
+    ports:
+      - "9200:9200"
+#      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      discovery.type: "single-node"
+      cluster.routing.allocation.disk.threshold_enabled: false
+      xpack.security.enabled: "false"
+      xpack.security.transport.ssl.enabled: "false"
+    volumes:
+      - ./elasticsearch_7.10.2:/usr/share/elasticsearch/data
+    networks:
+      - graylog_network
 
+  mongo:
+    image: mongo:4.0
+    container_name: mongo
+    networks:
+      - graylog_network
+    volumes:
+      - ./mongo:/data/db
+
+  graylog:
+    image: graylog/graylog:4.3.0
+    container_name: graylog
+    ports:
+      - "9000:9000"
+      - "12201:12201/udp"
+      - "1514:1514"
+    environment:
+      GRAYLOG_HTTP_EXTERNAL_URI: "http://127.0.0.1:9000/"
+      GRAYLOG_PASSWORD_SECRET: "forpasswordencryption"
+      GRAYLOG_ROOT_PASSWORD_SHA2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+    networks:
+      - graylog_network
+    depends_on:
+      - elasticsearch
+      - mongo
+
+  mqtt_logging_handler:
+    image: openjdk:23-jdk-slim
+    container_name: mqtt_logging_handler
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../Backend/mqtt_logging_handler/target:/app
+      - ./mqtt_logging_handler/logs:/app/logs
+    command: java -jar /app/quarkus-app/quarkus-run.jar
+    networks:
+      - graylog_network
+    depends_on:
+      - graylog
+      - elasticsearch
+      - mongo
+
+  mqtt_for_home_assistant:
+    image: eclipse-mosquitto
+    container_name: mqtt_for_home_assistant
+    ports:
+      - "1883:1883"
+    networks:
+      - graylog_network
+      - docker_compose_home_assistant_network
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+
+networks:
+  graylog_network:
+    driver: bridge
+
+  docker_compose_home_assistant_network:
+    external: true</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mongo"><a class="anchor" href="#_mongo"></a>2.1. Mongo</h3>
+<div class="paragraph">
+<p>Dient als Datenbank für die Graylog Konfiguration</p>
+</div>
+<div class="paragraph">
+<p>Bsp:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Users</p>
+</li>
+<li>
+<p>Dashboard settings</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_graylog"><a class="anchor" href="#_graylog"></a>2.2. Graylog</h3>
+<div class="paragraph">
+<p>Fungiert zur Visualisierung der Logs</p>
+</div>
+<div class="paragraph">
+<p>&#8594; Weiterleiten an Elasticsearch</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_elasticsearch"><a class="anchor" href="#_elasticsearch"></a>2.3. Elasticsearch</h3>
+<div class="paragraph">
+<p>Speichert die Logs aus Graylog</p>
+</div>
+<div class="listingblock">
+<div class="title">Docker Compose File (home_assistant.yml)</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="dockerfile">services:
+  home_assistant:
+    image: homeassistant/home-assistant:stable
+    container_name: home_assistant
+    ports:
+      - "8123:8123"
+    networks:
+      - home_assistant_network
+    volumes:
+      - ./homeassistant:/config
+    environment:
+      - TZ=Europe/Berlin
+    restart: always
+
+networks:
+  home_assistant_network:
+    driver: bridge</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ausführen"><a class="anchor" href="#_ausführen"></a>2.4. Ausführen</h3>
+<div class="listingblock">
+<div class="title">Im Quarkus Logger (mqtt_logging_handler)</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell"> mvn clean package</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Im Docker Compose File holt man sich automatisch die .jar File</p>
+</div>
+<div class="listingblock">
+<div class="title">Im Docker_Compose Verzeichnis</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">docker compose <span class="nt">-f</span> home_assistant.yml up <span class="nt">-d</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">docker compose <span class="nt">-f</span> graylog.yml up <span class="nt">-d</span></code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_html_logger"><a class="anchor" href="#_html_logger"></a>3. HTML Logger</h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@Path</span><span class="o">(</span><span class="s">"/hello"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloResource</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="no">LOG</span> <span class="o">=</span> <span class="nc">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">MqttMessageLogger</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
 
+    <span class="nd">@GET</span>
+    <span class="nd">@Produces</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello</span><span class="o">()</span> <span class="o">{</span>
+        <span class="no">LOG</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"/hello was called"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="s">"Hello"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_mqtt_logger"><a class="anchor" href="#_mqtt_logger"></a>4. MQTT Logger</h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@ApplicationScoped</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MqttMessageLogger</span> <span class="o">{</span>
+    <span class="nc">DateTimeFormatter</span> <span class="n">formatter</span> <span class="o">=</span> <span class="nc">DateTimeFormatter</span><span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"dd-MM-yy HH:mm:ss"</span><span class="o">);</span>
 
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="no">LOG</span> <span class="o">=</span> <span class="nc">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">MqttMessageLogger</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+    <span class="nd">@Incoming</span><span class="o">(</span><span class="s">"mqtt"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">CompletionStage</span><span class="o">&lt;</span><span class="nc">Void</span><span class="o">&gt;</span> <span class="nf">onMqttMessage</span><span class="o">(</span><span class="nc">Message</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="nc">String</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="na">getPayload</span><span class="o">();</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n"</span> <span class="o">+</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">ofInstant</span><span class="o">(</span><span class="nc">Instant</span><span class="o">.</span><span class="na">ofEpochMilli</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()),</span> <span class="nc">ZoneId</span><span class="o">.</span><span class="na">systemDefault</span><span class="o">()).</span><span class="na">format</span><span class="o">(</span><span class="n">formatter</span><span class="o">));</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Received message: "</span> <span class="o">+</span> <span class="n">payload</span><span class="o">);</span>
+
+        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">topicNameOpt</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="na">getMetadata</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="nc">ReceivingMqttMessageMetadata</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">metadata</span> <span class="o">-&gt;</span> <span class="n">metadata</span><span class="o">.</span><span class="na">getMessage</span><span class="o">().</span><span class="na">topicName</span><span class="o">());</span>
+
+        <span class="n">topicNameOpt</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">topicName</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="nc">String</span> <span class="n">logMessage</span> <span class="o">=</span> <span class="n">topicName</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">payload</span><span class="o">;</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Sent to topic: "</span> <span class="o">+</span> <span class="n">topicName</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">topicName</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"/debug"</span><span class="o">))</span> <span class="o">{</span>
+                <span class="no">LOG</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="n">logMessage</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">payload</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"offline"</span><span class="o">)</span> <span class="o">||</span> <span class="n">payload</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"online"</span><span class="o">))</span> <span class="o">{</span>
+                <span class="no">LOG</span><span class="o">.</span><span class="na">warn</span><span class="o">(</span><span class="n">logMessage</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">payload</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"error"</span><span class="o">)</span> <span class="o">||</span> <span class="n">payload</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"failure"</span><span class="o">))</span> <span class="o">{</span>
+                <span class="no">LOG</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">logMessage</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="no">LOG</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">logMessage</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+
+        <span class="k">return</span> <span class="nc">CompletableFuture</span><span class="o">.</span><span class="na">completedFuture</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_graylog"><a class="anchor" href="#_graylog"></a>5. Graylog</h2>
+<h2 id="_graylog_2"><a class="anchor" href="#_graylog_2"></a>5. Graylog</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Inject Logger (Input)</p>
-</li>
-<li>
-<p>Logging with Gelf (Log Levels)</p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="_inject_logger_input"><a class="anchor" href="#_inject_logger_input"></a>5.1. Inject Logger (Input)</h3>
+<div class="paragraph">
+<p><a href="http://localhost:9000/system/inputs">Graylog/Input</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_logging_levels"><a class="anchor" href="#_logging_levels"></a>5.2. Logging  Levels</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/log_level.png" alt="log level">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_im_graylog"><a class="anchor" href="#_im_graylog"></a>5.2.1. Im Graylog:</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>0 - Emergency</p>
+</li>
+<li>
+<p>1 - Alert</p>
+</li>
+<li>
+<p>2 - Critical</p>
+</li>
+<li>
+<p>3 - Error</p>
+</li>
+<li>
+<p>4 - Warning</p>
+</li>
+<li>
+<p>5 - Notice</p>
+</li>
+<li>
+<p>6 - Informational</p>
+</li>
+<li>
+<p>7 - Debug</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -536,7 +927,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_elk_stack_elasticsearch_logstash_kibana"><a class="anchor" href="#_elk_stack_elasticsearch_logstash_kibana"></a>6.1. ELK Stack (Elasticsearch, Logstash, Kibana)</h3>
-
+<div class="ulist">
+<ul>
+<li>
+<p>bekannte und weit verbreitete Lösung</p>
+</li>
+<li>
+<p>Suchleistung ist überragend (Pfeilschnell)</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_efk_stack_elasticsearch_fluentd_kibana"><a class="anchor" href="#_efk_stack_elasticsearch_fluentd_kibana"></a>6.2. EFK Stack (Elasticsearch, Fluentd, Kibana)</h3>
@@ -549,80 +949,88 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_gelf_alternativen_graylog_extended_log_format"><a class="anchor" href="#_gelf_alternativen_graylog_extended_log_format"></a>7. GELF Alternativen (Graylog Extended Log Format)</h2>
+<h2 id="_gelf_alternativen_graylog_extended_log_format"><a class="anchor" href="#_gelf_alternativen_graylog_extended_log_format"></a>7. GELF + Alternativen (Graylog Extended Log Format)</h2>
 <div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code>{
+  "version": "1.1",
+  "host": "example.org",
+  "short_message": "A short message that helps you identify what is going on",
+  "full_message": "Backtrace here\n\nmore stuff",
+  "timestamp": 1385053862.3072,
+  "level": 1,
+  "_user_id": 9001,
+  "_some_info": "foo",
+  "_some_env_var": "bar"
+}</code></pre>
+</div>
+</div>
 <div class="sect2">
-<h3 id="_ecs_elastic_common_schema_format"><a class="anchor" href="#_ecs_elastic_common_schema_format"></a>7.1. ECS (Elastic Common Schema) format</h3>
+<h3 id="_json"><a class="anchor" href="#_json"></a>7.1. JSON</h3>
 
+</div>
+<div class="sect2">
+<h3 id="_ecs_elastic_common_schema_format"><a class="anchor" href="#_ecs_elastic_common_schema_format"></a>7.2. ECS (Elastic Common Schema) format</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code>{
+"@timestamp": "2023-01-01T12:00:00Z",
+"event.action": "authentication",
+"user.name": "jeeva_s",
+"source.ip": "172.1.1.1",
+"outcome": "success"
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>8. Summary</h2>
+<h2 id="_centralized_decentralized_logging"><a class="anchor" href="#_centralized_decentralized_logging"></a>8. Centralized / Decentralized Logging</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_centralized_logging"><a class="anchor" href="#_centralized_logging"></a>8.1. Centralized Logging</h3>
 <div class="paragraph">
-<p>Logs from various sources are collected in one location, offering unified search and analysis.</p>
+<p>Logs aus verschiedenen Quellen werden in einem Platz zusammengesammelt.
+Das bietet eine vereinte Suche und Analyse.</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Bsp:</p>
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p>ELK Stack</p>
-</li>
-<li>
-<p>Splunk</p>
-</li>
 <li>
 <p>Graylog</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p>Easier management</p>
-</li>
-<li>
-<p>Real-time analytics</p>
-</li>
-<li>
-<p>Powerful monitoring</p>
+<p>ELK / EFK Stack</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Cons:</p>
+<p>Vorteile:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Costly</p>
+<p>leichteres Management / Monitoring</p>
 </li>
 <li>
-<p>Relies on robust network infrastructure</p>
+<p>Real-time Analysen</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Best For:</p>
+<p>Nachteile:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Security monitoring</p>
+<p>Kostenintensiv</p>
 </li>
 <li>
-<p>Compliance and auditing</p>
-</li>
-<li>
-<p>Root cause analysis in large, complex systems</p>
+<p>braucht eine starke Netzwerk-Infrastruktur</p>
 </li>
 </ul>
 </div>
@@ -630,10 +1038,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_decentralized_logging"><a class="anchor" href="#_decentralized_logging"></a>8.2. Decentralized Logging</h3>
 <div class="paragraph">
-<p>Logs are stored locally where events occur, functioning independently of the network.</p>
+<p>Logs werden lokal gespeichert, was unabhängig vom Netzwerk funktioniert</p>
 </div>
 <div class="paragraph">
-<p>Examples:</p>
+<p>Bsp:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -641,52 +1049,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>rsyslog</p>
 </li>
 <li>
-<p>Windows Event Log</p>
-</li>
-<li>
-<p>Local file storage</p>
+<p>lokale .log files</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Pros:</p>
+<p>Vorteile:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Simple setup</p>
+<p>Simples Setup</p>
 </li>
 <li>
-<p>Reliable</p>
-</li>
-<li>
-<p>Network-independent</p>
+<p>Netzwerk unabhängig</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Cons:</p>
+<p>Nachteile:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Harder to analyze</p>
+<p>schwer zu analysieren / auszuwerten</p>
 </li>
 <li>
-<p>Time-consuming for large systems</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Best For:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Local troubleshooting</p>
-</li>
-<li>
-<p>Low-latency or bandwidth-sensitive environments</p>
+<p>Fehlersuche ist zeitintensiv</p>
 </li>
 </ul>
 </div>
@@ -694,22 +1083,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_key_considerations"><a class="anchor" href="#_key_considerations"></a>9. Key Considerations</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Scale &amp; Complexity: Centralized logging is better for large-scale systems.</p>
-</li>
-<li>
-<p>Network Reliability: Decentralized logging is more resilient to network issues.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_links"><a class="anchor" href="#_links"></a>10. Links</h2>
+<h2 id="_links"><a class="anchor" href="#_links"></a>9. Links</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -732,7 +1106,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-07 11:22:46 UTC
+Last updated 2025-01-07 12:25:16 UTC
 </div>
 </div>
 </body>
