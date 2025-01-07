@@ -1,8 +1,17 @@
 = Table of Contents
+1.0, {docdate}
+ifndef::sourcedir[:sourcedir: ../src/main/java]
+ifndef::imagesdir[:imagesdir: images]
+ifndef::backend[:backend: html5]
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
+:source-highlighter: rouge
+:docinfo: shared
 
 == Genereller Aufbau
 
-image::images/network_docker_compose.png[]
+image::network_docker_compose.png[]
 
 == Docker Compose File
 
@@ -14,7 +23,7 @@ image::images/network_docker_compose.png[]
 * Inject Logger (Input)
 * Logging with Gelf (Log Levels)
 
-image::images/log_level.png[]
+image::log_level.png[]
 
 == Alternativen zu Graylog
 
