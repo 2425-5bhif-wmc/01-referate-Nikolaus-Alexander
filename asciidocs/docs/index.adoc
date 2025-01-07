@@ -251,11 +251,28 @@ image::log_level.png[]
 == Alternativen zu Graylog
 
 === ELK Stack (Elasticsearch, Logstash, Kibana)
+Vorteile:
 
 * bekannte und weit verbreitete Lösung
 * Suchleistung ist überragend (Pfeilschnell)
+* viele Plugins
+
+Nachteile:
+
+* Komplex aufzusetzen
+* ressourcenintensiv
 
 === EFK Stack (Elasticsearch, Fluentd, Kibana)
+
+Vorteile:
+
+* Ressourcenschonend
+* Simpel aufzusetzen
+
+Nachteile:
+
+* Weniger Möglichkeiten / Funktionen für komplexe Abfragen und Transformationen
+* Weniger verbreitet
 
 === Loki (mit Grafana)
 
@@ -338,3 +355,4 @@ Nachteile:
 * https://quarkus.io/guides/centralized-log-management
 * https://smallrye.io/smallrye-reactive-messaging/smallrye-reactive-messaging/3.3/mqtt/mqtt.html
 * https://stackoverflow.com/questions/38088279/communication-between-multiple-docker-compose-projects
+* https://www.reddit.com/r/devops/comments/9quyzo/from_elk_to_efk_why/?tl=de
