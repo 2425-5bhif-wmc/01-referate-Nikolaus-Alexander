@@ -22,7 +22,7 @@ image::network_docker_compose.png[]
 == Docker Compose Files
 
 .Docker Compose File (graylog.yml)
-[source,dockerfile]
+[source,yaml]
 ----
 services:
   elasticsearch:
@@ -124,7 +124,7 @@ Fungiert zur Visualisierung der Logs
 Speichert die Logs aus Graylog
 
 .Docker Compose File (home_assistant.yml)
-[source,dockerfile]
+[source,yaml]
 ----
 services:
   home_assistant:
