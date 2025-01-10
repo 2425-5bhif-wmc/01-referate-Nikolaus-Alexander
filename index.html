@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="author" content="1.0, 2025-01-07">
+<meta name="author" content="1.0, 2025-01-10">
 <link rel="icon" type="image/png" href="themes/favicon.png">
 <title>Table of Contents</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -563,7 +563,7 @@ pre.rouge .gs {
 <div id="header">
 <h1>Table of Contents</h1>
 <div class="details">
-<span id="author" class="author">1.0, 2025-01-07</span><br>
+<span id="author" class="author">1.0, 2025-01-10</span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -597,7 +597,8 @@ pre.rouge .gs {
 <ul class="sectlevel2">
 <li><a href="#_elk_stack_elasticsearch_logstash_kibana">5.1. ELK Stack (Elasticsearch, Logstash, Kibana)</a></li>
 <li><a href="#_efk_stack_elasticsearch_fluentd_kibana">5.2. EFK Stack (Elasticsearch, Fluentd, Kibana)</a></li>
-<li><a href="#_loki_mit_grafana">5.3. Loki (mit Grafana)</a></li>
+<li><a href="#_graylog_vs_fluentd_vs_logstash">5.3. Graylog vs Fluentd vs Logstash</a></li>
+<li><a href="#_für_grafana_enthusiasten_loki">5.4. für Grafana enthusiasten: Loki</a></li>
 </ul>
 </li>
 <li><a href="#_gelf_alternativen_graylog_extended_log_format">6. GELF + Alternativen (Graylog Extended Log Format)</a>
@@ -746,6 +747,9 @@ pre.rouge .gs {
 <p>Dashboard settings</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>~"Dient zur Haltung von Metadaten und Konfigurationen"</p>
 </div>
 </div>
 <div class="sect2">
@@ -1020,7 +1024,49 @@ quarkus.log.file.rotation.max-backup-index=3</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_loki_mit_grafana"><a class="anchor" href="#_loki_mit_grafana"></a>5.3. Loki (mit Grafana)</h3>
+<h3 id="_graylog_vs_fluentd_vs_logstash"><a class="anchor" href="#_graylog_vs_fluentd_vs_logstash"></a>5.3. Graylog vs Fluentd vs Logstash</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Funktion</th>
+<th class="tableblock halign-left valign-top">Graylog</th>
+<th class="tableblock halign-left valign-top">Fluentd</th>
+<th class="tableblock halign-left valign-top">Logstash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Hauptanwendung</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zentralisiertes Logging und Analysefähigkeiten</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Datensammlung und -aggregation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Datenverarbeitung und -aggregation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Benutzerfreundlichkeit</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Benutzerfreundliche Oberfläche und eigene Dashboards</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Konfiguration über YAML-Dateien</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Erfordert benutzerdefinierte Pipelines und Konfigurationen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Integrationen</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eingebaute Unterstützung für ElasticSearch, MongoDB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Breites Plugin-Ökosystem, Integration mit Kafka, o.ä.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Umfangreiche Plugin-Bibliothek, nahtlose Integration mit dem Elastic Stack</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>aggregation: Beschreibt das Sammeln und Zusammenfassen von Daten.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_für_grafana_enthusiasten_loki"><a class="anchor" href="#_für_grafana_enthusiasten_loki"></a>5.4. für Grafana enthusiasten: Loki</h3>
 
 </div>
 </div>
@@ -1186,7 +1232,7 @@ Das bietet eine vereinte Suche und Analyse.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-07 13:06:05 UTC
+Last updated 2025-01-10 07:01:15 UTC
 </div>
 </div>
 </body>
