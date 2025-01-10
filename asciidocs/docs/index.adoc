@@ -21,7 +21,7 @@ image::network_docker_compose.png[]
 
 == Docker Compose Files
 
-.Docker Compose File (graylog.yml)
+.Docker Compose File (graylog.yaml)
 [source,yaml]
 ----
 services:
@@ -133,7 +133,8 @@ Fungiert zur Visualisierung der Logs
 
 Speichert die Logs aus Graylog
 
-.Docker Compose File (home_assistant.yml)
+=== Home Assistent
+.Docker Compose File (home_assistant.yaml)
 [source,yaml]
 ----
 services:
