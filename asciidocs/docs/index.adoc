@@ -30,7 +30,6 @@ services:
     container_name: elasticsearch_7.10.2
     ports:
       - "9200:9200"
-    #      - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       discovery.type: "single-node"
@@ -63,9 +62,6 @@ services:
       GRAYLOG_PASSWORD_SECRET: "forpasswordencryption"
       GRAYLOG_ROOT_PASSWORD_SHA2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
       GRAYLOG_TIMEZONE: "Europe/Berlin"
-      TZ: "Europe/Berlin"
-#    volumes:
-#      - ./graylog/config:/usr/share/graylog/data/config:ro
     networks:
       - graylog_network
     depends_on:
