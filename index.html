@@ -656,13 +656,14 @@ pre.rouge .gs {
     <span class="na">container_name</span><span class="pi">:</span> <span class="s">elasticsearch_7.10.2</span>
     <span class="na">ports</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s2">"</span><span class="s">9200:9200"</span>
-<span class="c1">#      - "9300:9300"</span>
+    <span class="c1">#      - "9300:9300"</span>
     <span class="na">environment</span><span class="pi">:</span>
       <span class="na">ES_JAVA_OPTS</span><span class="pi">:</span> <span class="s2">"</span><span class="s">-Xms512m</span><span class="nv"> </span><span class="s">-Xmx512m"</span>
       <span class="na">discovery.type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">single-node"</span>
       <span class="na">cluster.routing.allocation.disk.threshold_enabled</span><span class="pi">:</span> <span class="kc">false</span>
       <span class="na">xpack.security.enabled</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
       <span class="na">xpack.security.transport.ssl.enabled</span><span class="pi">:</span> <span class="s2">"</span><span class="s">false"</span>
+      <span class="na">TZ</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Europe/Berlin"</span>
     <span class="na">volumes</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">./elasticsearch_7.10.2:/usr/share/elasticsearch/data</span>
     <span class="na">networks</span><span class="pi">:</span>
@@ -687,6 +688,10 @@ pre.rouge .gs {
       <span class="na">GRAYLOG_HTTP_EXTERNAL_URI</span><span class="pi">:</span> <span class="s2">"</span><span class="s">http://127.0.0.1:9000/"</span>
       <span class="na">GRAYLOG_PASSWORD_SECRET</span><span class="pi">:</span> <span class="s2">"</span><span class="s">forpasswordencryption"</span>
       <span class="na">GRAYLOG_ROOT_PASSWORD_SHA2</span><span class="pi">:</span> <span class="s2">"</span><span class="s">8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"</span>
+      <span class="na">GRAYLOG_TIMEZONE</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Europe/Berlin"</span>
+      <span class="na">TZ</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Europe/Berlin"</span>
+<span class="c1">#    volumes:</span>
+<span class="c1">#      - ./graylog/config:/usr/share/graylog/data/config:ro</span>
     <span class="na">networks</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">graylog_network</span>
     <span class="na">depends_on</span><span class="pi">:</span>
@@ -702,6 +707,8 @@ pre.rouge .gs {
       <span class="pi">-</span> <span class="s">../Backend/mqtt_logging_handler/target:/app</span>
       <span class="pi">-</span> <span class="s">./mqtt_logging_handler/logs:/app/logs</span>
     <span class="na">command</span><span class="pi">:</span> <span class="s">java -jar /app/quarkus-app/quarkus-run.jar</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">TZ</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Europe/Berlin"</span>
     <span class="na">networks</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">graylog_network</span>
     <span class="na">depends_on</span><span class="pi">:</span>
@@ -721,7 +728,8 @@ pre.rouge .gs {
       <span class="pi">-</span> <span class="s">./mosquitto/config:/mosquitto/config</span>
       <span class="pi">-</span> <span class="s">./mosquitto/data:/mosquitto/data</span>
       <span class="pi">-</span> <span class="s">./mosquitto/log:/mosquitto/log</span>
-
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">TZ</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Europe/Berlin"</span>
 <span class="na">networks</span><span class="pi">:</span>
   <span class="na">graylog_network</span><span class="pi">:</span>
     <span class="na">driver</span><span class="pi">:</span> <span class="s">bridge</span>
@@ -1234,7 +1242,7 @@ Das bietet eine vereinte Suche und Analyse.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-10 08:03:50 UTC
+Last updated 2025-01-10 08:11:27 UTC
 </div>
 </div>
 </body>
