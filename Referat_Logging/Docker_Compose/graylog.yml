@@ -4,13 +4,14 @@ services:
     container_name: elasticsearch_7.10.2
     ports:
       - "9200:9200"
-#      - "9300:9300"
+    #      - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       discovery.type: "single-node"
       cluster.routing.allocation.disk.threshold_enabled: false
       xpack.security.enabled: "false"
       xpack.security.transport.ssl.enabled: "false"
+      TZ: "Europe/Berlin"
     volumes:
       - ./elasticsearch_7.10.2:/usr/share/elasticsearch/data
     networks:
@@ -35,6 +36,10 @@ services:
       GRAYLOG_HTTP_EXTERNAL_URI: "http://127.0.0.1:9000/"
       GRAYLOG_PASSWORD_SECRET: "forpasswordencryption"
       GRAYLOG_ROOT_PASSWORD_SHA2: "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+      GRAYLOG_TIMEZONE: "Europe/Berlin"
+      TZ: "Europe/Berlin"
+    volumes:
+      - ./graylog/config:/usr/share/graylog/data/config:ro
     networks:
       - graylog_network
     depends_on:
@@ -50,6 +55,8 @@ services:
       - ../Backend/mqtt_logging_handler/target:/app
       - ./mqtt_logging_handler/logs:/app/logs
     command: java -jar /app/quarkus-app/quarkus-run.jar
+    environment:
+      TZ: "Europe/Berlin"
     networks:
       - graylog_network
     depends_on:
@@ -69,7 +76,8 @@ services:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
-
+    environment:
+      TZ: "Europe/Berlin"
 networks:
   graylog_network:
     driver: bridge
