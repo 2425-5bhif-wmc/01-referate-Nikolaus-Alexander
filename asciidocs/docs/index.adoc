@@ -314,7 +314,7 @@ Nachteile:
 
 | **Benutzerfreundlichkeit** | Benutzerfreundliche Oberfläche und eigene Dashboards | Konfiguration über YAML-Dateien | Erfordert benutzerdefinierte Pipelines und Konfigurationen
 
-| **Integrationen**  | Eingebaute Unterstützung für ElasticSearch, MongoDB | Breites Plugin-Ökosystem, Integration mit Kafka, o.ä. | Umfangreiche Plugin-Bibliothek, nahtlose Integration mit dem Elastic Stack
+| **Integrationen**  | Eingebaute Unterstützung für ElasticSearch, MongoDB | Breites Plugin-Ökosystem, schnelle Integration mit Kafka, o.ä. | Umfangreiche Plugin-Bibliothek
 |===
 aggregation: Beschreibt das Sammeln und Zusammenfassen von Daten.
 
