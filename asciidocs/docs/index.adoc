@@ -269,6 +269,7 @@ link:http://localhost:9000/system/inputs[Graylog/Input]
 
 === Logging  Levels
 
+.edgedata
 image::log_level.png[]
 
 ==== Im Graylog:
