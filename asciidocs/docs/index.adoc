@@ -113,6 +113,8 @@ Bsp:
 * Users
 * Dashboard settings
 
+~"Dient zur Haltung von Metadaten und Konfigurationen"
+
 === Graylog
 
 Fungiert zur Visualisierung der Logs
@@ -302,7 +304,21 @@ Nachteile:
 * Weniger Möglichkeiten / Funktionen für komplexe Abfragen und Transformationen
 * Weniger verbreitet
 
-=== Loki (mit Grafana)
+=== Graylog vs Fluentd vs Logstash
+
+[cols="1,1,1,1", options="header"]
+|===
+| Funktion          | Graylog                         | Fluentd                        | Logstash
+
+| **Hauptanwendung** | Zentralisiertes Logging und Analysefähigkeiten | Datensammlung und -aggregation | Datenverarbeitung und -aggregation
+
+| **Benutzerfreundlichkeit** | Benutzerfreundliche Oberfläche und eigene Dashboards | Konfiguration über YAML-Dateien | Erfordert benutzerdefinierte Pipelines und Konfigurationen
+
+| **Integrationen**  | Eingebaute Unterstützung für ElasticSearch, MongoDB | Breites Plugin-Ökosystem, Integration mit Kafka, o.ä. | Umfangreiche Plugin-Bibliothek, nahtlose Integration mit dem Elastic Stack
+|===
+aggregation: Beschreibt das Sammeln und Zusammenfassen von Daten.
+
+=== für Grafana enthusiasten: Loki
 
 == GELF + Alternativen (Graylog Extended Log Format)
 
